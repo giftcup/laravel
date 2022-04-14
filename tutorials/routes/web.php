@@ -19,4 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('contact-us', [PageController::class, 'showContactPage']);
+// Contact us route
+Route::get('contact-us', [PageController::class, 'showContactPage'])->name('contact');
+Route::get('about', [PageController::class, 'showAboutPage'])->name('about');
+Route::get('profile/me', [PageController::class, 'showProfileMePage'])->name('profile');
+
+// Student routes
+Route::get('students', [StudentController::class, 'index'])->name('students');
+Route::get('students/{id}', [StudentController::class, 'show'])->name('studentDetails');
