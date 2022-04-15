@@ -25,6 +25,7 @@
             <li class="nav-link"><a class="nav-link" href="{{ route('profile') }}">Profile</a></li>
             <li class="nav-link"><a class="nav-link" href="{{ route('students') }}">Students</a></li>
             <li class="nav-link"><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
+            <li class="nav-link"><a class="nav-link" href="{{ route('students.create') }}">New Student</a></li>
         </ul>
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

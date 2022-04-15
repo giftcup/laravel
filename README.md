@@ -147,3 +147,9 @@ php artisan make:migration name
 ```
 php artisan migrate
 ```
+
+## Eloquent Models
+
+- Each database table has a corresponding model which is used to interact with the table.
+- Models are used to query data from and add data to a database.
+- All models are singular and the database is plural in laravel.
