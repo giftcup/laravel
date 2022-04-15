@@ -121,3 +121,29 @@ return view('student-details')->with('selectedStudentId', $studentId);
 ```
 - In case a different name needs to be used in the view, the first parameter of the <i>with</i>
 method is used to assign the new name. 
+
+## Database Migrations
+
+- Database migration helps a team to be able to sync their databases
+- The database connection needs to be configured in the <i>.env</i> folder
+- Then, the database with the same name, user and password as specified in the <i>.env</i> file needs
+to be created on our database server.
+- A new table migration is later on created using the command:
+
+```
+php artisan make:migration name
+```
+- The table migration would contain the name of the tables we want to add in its Schema. For example:
+
+<i>
+     Schema::create('students', function (Blueprint $table) {
+            $table->id();;
+            $table->timestamps();
+    });
+</i>
+
+- To migrate the tables that were created to the database server, the following command is run:
+
+```
+php artisan migrate
+```
