@@ -1,64 +1,160 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Laravel
+## Learning Laravel: Beginner to Professional
 
-## About Laravel
+## Starting a laravel project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- In order to create a laravel project using composer, run
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+composer create-project laravel/laravel app-name
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
 
-## Learning Laravel
+## Creating and Using Controllers
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Controllers are responsible to controlling application logic and
+act as a coordinator between the View and the Model.
+- To create a new controller, run this command in the terminal:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+php artisan make:controller NameController
 
-## Laravel Sponsors
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### Problem: Controllers not found by the app
 
-### Premium Partners
+Sometimes, even after running the command, it might be necessary
+to include Controllers as a <i>namespace</i> in other to be
+able to use them in a file. This is done by adding the following
+line to the file the controller needs to be used in.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```
+namespace App\Http\Controllers;
 
-## Contributing
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Creating and Using Views
 
-## Code of Conduct
+- The View component is involved in the application's user interface.
+- Views are found in the resources folder.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+In other to use a view, the view helper function  with the view name as parameter
+has to be return :
 
-## Security Vulnerabilities
+``` 
+return view('viewName');
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Route names
 
-## License
+- The route names allow you to use the same route across multiple files by simply
+using the name assigned to the route.
+- It makes it easier to modify routes as the names don;t have to be modified across
+multiple files.
+- The name helper function is used to name a route. Assigning the name <i>contact<i> to the 
+route <i>contact-us<i> is done as shown below:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+``` 
+Route::get('contact-us', [PageController::class, 'showContactPage'])->name('contact');
+```
+
+- In order to use this route in a view, the route helper function is used with the route
+name. For example, using the contact-us route is as shown below.
+
+``` 
+<a href="{{ route('contact') }}"> Contact Us </a>
+```
+
+### Rendering data on blade using {{}}
+
+- The curly braces are used to open php and echo/print the content that's in the braces.
+- This format does not process html, in order to process html, an escape sequence is used
+with a single pair of curly braces: <b>{!! (html content here) !!}</b>
+
+## Passing Parameters between Routes, Controllers and Views
+
+### Passing to Routes
+
+- The method <i>route</i> takes an extra parameter which can hold keys and values
+that are passed to the route. This is done using an associative array. 
+- The name of the key has to be the same as the name of the variable that was used in the
+route.
+
+For example, given the route;
+
+``` 
+Route::get('students/{id}', [StudentController::class, 'show'])->name('studentDetails');
+```
+
+the {id} is the variable that needs to be replaced. To do so, we pass an extra parameter to the
+route method where it is called as shown in the example below:
+
+```
+<a href="{{ route('studentDetails',  ['id' => 1] )}}">details</a>
+```
+
+### Passing to the Controller
+
+- The variable can then be passed from the route to the Controller.
+- Only the method that accessed the parameter in the route can access it directly in the
+controller.
+- The variables mustn't neccesarily be named the same but their order needs to be respected.
+- Using the <i>id</i> in the show function of StudentController is as shown below.
+
+``` 
+public function show($studentId) { ... }
+```
+
+### Passing to the View
+
+- From the controller, the variable can be passed to the view using two methods:
+
+#### The compact method
+
+```
+return view('student-details', compact('studentId'));
+```
+- The limitation of this method is, the variable name can't be changed in a View without changing
+all instances of it in the Controller.
+
+#### The with method
+
+```
+return view('student-details')->with('selectedStudentId', $studentId);
+```
+- In case a different name needs to be used in the view, the first parameter of the <i>with</i>
+method is used to assign the new name. 
+
+## Database Migrations
+
+- Database migration helps a team to be able to sync their databases
+- The database connection needs to be configured in the <i>.env</i> folder
+- Then, the database with the same name, user and password as specified in the <i>.env</i> file needs
+to be created on our database server.
+- A new table migration is later on created using the command:
+
+```
+php artisan make:migration name
+```
+- The table migration would contain the name of the tables we want to add in its Schema. For example:
+
+<i>
+     Schema::create('students', function (Blueprint $table) {
+            $table->id();;
+            $table->timestamps();
+    });
+</i>
+
+- To migrate the tables that were created to the database server, the following command is run:
+
+```
+php artisan migrate
+```
+
+## Eloquent Models
+
+- Each database table has a corresponding model which is used to interact with the table.
+- Models are used to query data from and add data to a database.
+- All models are singular and the database is plural in laravel.
