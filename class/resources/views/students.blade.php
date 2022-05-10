@@ -4,9 +4,9 @@
     <section class="student-table">
         <table>
             <tr>
+                <th>Matricule</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Matricule</th>
             </tr>
             @foreach ($students as $student)
                 <tr>
