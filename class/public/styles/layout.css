@@ -103,3 +103,9 @@ table, th, td {
     border-collapse: collapse;
     padding: 1rem;
 }
+
+th {
+    border: 1px solid #555;
+    background-color: #000;
+    color: #fff;
+}
