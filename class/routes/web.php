@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts/layout');
+    return view('welcome');
 });
 
 Route::get('students', [StudentController::class, 'index'])->name('students');
 Route::get('students/new', [StudentController::class, 'add'])->name('student.add');
 Route::post('/students', [StudentController::class, 'store'])->name('student.store');
+Route::get('/students/{id}', [StudentController::class, 'deleteStudent'])->name('student.delete');
+Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('editStore');
