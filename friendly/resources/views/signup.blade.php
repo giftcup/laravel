@@ -8,6 +8,8 @@
         </header>
         <section>
             <form action="">
+                @csrf
+
                 <input type="email" placeholder="Email" name="email">
                 <input type="text" placeholder="Username" name="username">
                 <input type="password" name="password" placeholder="Password">

@@ -18,7 +18,7 @@
             <div class="form-group mb-4">
                 <button class="btn btn-primary" type="submit"> Submit </button>
             </div>
-        </form>
+        </form> 
     </div>
     
 @endsection
