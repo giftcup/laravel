@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/signup', function() {
-    return view('signup');
-}); 
+
+Route::get('/signup', [PageController::class, 'signupPage'])->name('signup');
+Route::post('/signup.submit', [UserController::class, 'signupUser']);

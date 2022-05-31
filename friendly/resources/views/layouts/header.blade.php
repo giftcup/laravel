@@ -30,7 +30,7 @@ session_start();
                     <li class="ul-nav-header-li"><a href="./contacts.php">Contacts</a></li>
                 </ul>
                 <a href="login.php" class="btn btn-lgn">Login</a>
-                <a href="signup.php" class="btn btn-sup">Signup</a>
+                <a href="{{ route('signup') }}" class="btn btn-sup">Signup</a>
             </div>
         </div>
     </nav>
