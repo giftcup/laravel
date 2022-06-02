@@ -1,7 +1,7 @@
 @extends('layouts/layout')
 
 @section('content')
-    <div class="add-form">
+    <main class="add-form">
         <h1 id="form-ttl">Add Student</h1>
         <form action="{{   route('student.store')  }}" method="POST">
             @csrf
@@ -18,8 +18,8 @@
                 <input type="text" name="matricule">
             </div>
             <div>
-                <button type="submit">Submit</button>
+                <button type="submit" class="submit">Submit</button>
             </div>
         </form>
-    </div>
+    </main>
 @endsection

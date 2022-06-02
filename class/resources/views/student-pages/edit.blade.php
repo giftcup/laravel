@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <section>
+    <main>
         <div class="add-form">
             <h1 id="form-ttl">Edit Student Info</h1>
             <form action="{{ route('editStore', ['id' => $student['id']]) }}" method="POST">
@@ -19,9 +19,9 @@
                     <input type="text" name="matricule" value="{{ $student['matricule'] }}">
                 </div>
                 <div>
-                    <button type="submit">Edit</button>
+                    <button type="submit" class="submit">Edit</button>
                 </div>
             </form>
         </div>
-    </section>
+    </main>
 @endsection

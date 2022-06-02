@@ -12,7 +12,9 @@
 <body>
     <nav>
         <div class="logo">
-            <h1>Schule</h1>
+            <a href="{{ route('home') }}">
+                <h1>Schule</h1>
+            </a>
         </div>
         <ul class="nav-list">
             <li><a href="{{ route('students') }}">Class List</a></li>
@@ -20,9 +22,9 @@
         </ul>
     </nav>
 
-    <main>
-        @yield('content')
-    </main>
+
+    @yield('content')
+    
 </body>
 
 </html>

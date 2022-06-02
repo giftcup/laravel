@@ -2,11 +2,12 @@
 
 @section('content')
     <section class="student-table">
-        <table>
+        <table class="table-data">
             <tr>
                 <th>Matricule</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Edit/Delete</th>
             </tr>
             @foreach ($students as $student)
                 <tr>
