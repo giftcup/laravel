@@ -12,12 +12,12 @@ class StudentController extends Controller
         $students = [];
         $students = Student::all();
 
-        return view('students', compact('students'));
+        return view('student-pages.students', compact('students'));
     }
 
     public function add()
     {
-        return view('add');
+        return view('student-pages.add');
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class StudentController extends Controller
         $student = [];
         $student = Student::where('id', $studentId)->first();
 
-        return view('edit', compact('student'));
+        return view('student-pages.edit', compact('student'));
     }
 
     public function editStudent(Request $request, $studentId)
