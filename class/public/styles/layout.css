@@ -144,21 +144,21 @@ td a {
 
 /* Departments */
 
-.departments {
+.page {
     padding: 1rem;
 }
 
-.departments section {
+.page section {
     padding: 1em;
 }
 
 #underline {
     background-color: #000;
-    width: 6rem;
+    width: 45%;
     height: 0.3rem;
 }
 
-.dept_header {
+.page_header {
     display: flex;
     justify-content: space-between;
 }

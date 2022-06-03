@@ -17,8 +17,8 @@
             </a>
         </div>
         <ul class="nav-list">
-            <li><a href="{{ route('students') }}">Class List</a></li>
-            <li><a href="{{ route('student.add') }}">Add Student</a></li>
+            <li><a href="{{ route('students') }}">Students</a></li>
+            <li><a href="{{ route('departments') }}">Departments</a></li>
         </ul>
     </nav>
 

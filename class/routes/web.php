@@ -28,7 +28,7 @@ Route::get('/students/{id}', [StudentController::class, 'deleteStudent'])->name(
 Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
 Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('editStore');
 
-Route::get('/departments', [PageController::class, 'departments'])->name('departments');
+Route::get('/departments', [DepartmentController::class, 'getDepartments'])->name('departments');
 
 Route::get('/departments/add', function() {
     return view('department-pages.add-dept');
