@@ -7,7 +7,7 @@ use App\Models\Department;
 
 class DepartmentController extends Controller
 {
-    function storeDepart(Request $request) {
+    public function storeDepart(Request $request) {
         $data = $request->all();
 
         $department = new Department;
@@ -17,5 +17,12 @@ class DepartmentController extends Controller
         $department->save();
 
         return redirect()->route('departments');
+    }
+
+    public function getDepartments() {
+        $departments = [];
+        $departments = Department::all();
+
+        return view('department-pages.departments')->with('departs', $departments);
     }
 }
