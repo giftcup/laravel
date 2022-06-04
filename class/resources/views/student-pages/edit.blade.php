@@ -4,7 +4,7 @@
     <main>
         <div class="add-form">
             <h1 id="form-ttl">Edit Student Info</h1>
-            <form action="{{ route('editStore', ['id' => $student['id']]) }}" method="POST">
+            <form class="reg-form" action="{{ route('editStore', ['id' => $student['id']]) }}" method="POST">
                 @csrf
                 <div class="form-elmt">
                     <p>Name: </p>

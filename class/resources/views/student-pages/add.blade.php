@@ -3,7 +3,7 @@
 @section('content')
     <main class="add-form">
         <h1 id="form-ttl">Add Student</h1>
-        <form action="{{   route('student.store')  }}" method="POST">
+        <form class="reg-form" action="{{   route('student.store')  }}" method="POST">
             @csrf
             <div class="form-elmt">
                 <p>Name: </p>

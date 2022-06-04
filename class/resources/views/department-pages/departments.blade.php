@@ -24,8 +24,10 @@
                         <td>{{ $department['deptCode'] }}</td>
                         <td>{{ $department['deptName'] }}</td>
                         <td>Student</td>
-                        <td><a href=""><button>Edit</button></a>
-                            <a href=""><button>Delete</button></a>
+                        <td><a
+                                href="{{ route('department.edit', ['id' => $department['id']]) }}"><button>Edit</button></a>
+                            <a
+                                href="{{ route('department.delete', ['id' => $department['id']]) }}"><button>Delete</button></a>
                         </td>
                     </tr>
                 @endforeach

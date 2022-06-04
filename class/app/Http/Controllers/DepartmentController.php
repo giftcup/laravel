@@ -25,4 +25,29 @@ class DepartmentController extends Controller
 
         return view('department-pages.departments')->with('departs', $departments);
     }
+
+    public function editDeptPage($deptId) {
+        $department = [];
+        $department = Department::where('id', $deptId)->first();
+
+        return view('department-pages.edit-dept')->with('dpt', $department);
+    }
+
+    public function editDepartment(Request $req, $deptId) {
+        $data = $req->all();
+
+        Department::where('id', $deptId)
+               ->update([
+                   'deptCode' => $data['code'],
+                   'deptName' => $data['name']
+               ]);
+
+        return redirect()->route('departments');
+    }
+
+    public function deleteDepartment($deptId) {
+        Department::destroy($deptId);
+
+        return redirect()->route('departments');
+    }
 }
