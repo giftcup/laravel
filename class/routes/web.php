@@ -36,9 +36,7 @@ Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('
 
 Route::get('/departments', [DepartmentController::class, 'getDepartments'])->name('departments');
 
-Route::get('/departments/add', function() {
-    return view('department-pages.add-dept');
-})->name('department.add');
+Route::get('/departments/add', [Department::class, 'addDepart'])->name('department.add');
 
 Route::post('/departments', [DepartmentController::class, 'storeDepart'])->name('department.store');
 

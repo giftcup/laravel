@@ -6,16 +6,28 @@
         <form class="reg-form" action="{{   route('student.store')  }}" method="POST">
             @csrf
             <div class="form-elmt">
-                <p>Name: </p>
+                <label for="name">Name: </label>
                 <input type="text" name="name">
             </div>
             <div class="form-elmt">
-                <p>Email: </p>
+                <label for="email">Email: </label>
                 <input type="email" name="email">
             </div>
             <div class="form-elmt">
-                <p>Matricule: </p>
+                <label for="matricule">Matricule: </label>
                 <input type="text" name="matricule">
+            </div>
+            <div class="form-elmt">
+                <label for="departments">Department: </label>
+                <select name="department" id="select_dpt">
+                    <option value="{{ null }}">-Select Department-</option>
+                    @foreach($departments as $department)
+                        <option value="{{ $department }}"> {{ $department['deptName'] }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+
             </div>
             <div>
                 <button type="submit" class="submit">Submit</button>

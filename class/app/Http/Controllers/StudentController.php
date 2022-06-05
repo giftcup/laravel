@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -17,7 +18,10 @@ class StudentController extends Controller
 
     public function add()
     {
-        return view('student-pages.add');
+        $departments = [];
+        $departments = Department::all();
+
+        return view('student-pages.add', compact('departments'));
     }
 
     public function store(Request $request)
@@ -28,6 +32,14 @@ class StudentController extends Controller
         $student->name = $data['name'];
         $student->email = $data['email'];
         $student->matricule = $data['matricule'];
+        $department = $data['department'];
+        
+        if ($department == null):
+            $student->deptCode = null;
+        else:
+            $dept = json_decode($department);
+            $student->deptCode = $dept->id;
+        endif;
 
         $student->save();
 

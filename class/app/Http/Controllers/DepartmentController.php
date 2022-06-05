@@ -7,6 +7,10 @@ use App\Models\Department;
 
 class DepartmentController extends Controller
 {
+    public function addDepart() {
+        return view('department-pages.add-dept');
+    }
+
     public function storeDepart(Request $request) {
         $data = $request->all();
 
