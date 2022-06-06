@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Department;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -58,7 +59,10 @@ class StudentController extends Controller
         $student = [];
         $student = Student::where('id', $studentId)->first();
 
-        return view('student-pages.edit', compact('student'));
+        $departments = [];
+        $departments = Department::all();
+
+        return view('student-pages.edit', compact('student', 'departments'));
     }
 
     public function editStudent(Request $request, $studentId)

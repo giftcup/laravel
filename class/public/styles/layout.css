@@ -73,7 +73,7 @@ nav {
     margin-bottom: 1rem;
 }
 
-.form-elmt input, #select_dpt{
+.form-elmt input, .select_dpt{
     padding: 1rem;
     font-family: inherit;
     font-size: 100%;

@@ -7,16 +7,25 @@
             <form class="reg-form" action="{{ route('editStore', ['id' => $student['id']]) }}" method="POST">
                 @csrf
                 <div class="form-elmt">
-                    <p>Name: </p>
+                    <label>Name: </label>
                     <input type="text" name="name" value="{{ $student['name'] }}">
                 </div>
                 <div class="form-elmt">
-                    <p>Email: </p>
+                    <label>Email: </label>
                     <input type="email" name="email" value="{{ $student['email'] }}">
                 </div>
                 <div class="form-elmt">
-                    <p>Matricule: </p>
+                    <label>Matricule: </label>
                     <input type="text" name="matricule" value="{{ $student['matricule'] }}">
+                </div>
+                <div class="form-elmt">
+                    <label for="departments">Department: </label>
+                    <select name="department" class="select_dpt">
+                        <option value="{{ null }}">-Select Department-</option>
+                        @foreach ($departments as $department)
+                            <option value="{{ $department }}"> {{ $department['deptName'] }} </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div>
                     <button type="submit" class="submit">Edit</button>

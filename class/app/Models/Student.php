@@ -11,4 +11,8 @@ class Student extends Model
 
     public $timestamps = false;
     protected $table = 'students';
+
+    public function department() {
+        return $this->belongsTo(Department::class, 'deptCode');
+    }
 }

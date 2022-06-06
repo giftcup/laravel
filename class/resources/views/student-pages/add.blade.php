@@ -3,7 +3,7 @@
 @section('content')
     <main class="add-form">
         <h1 id="form-ttl">Add Student</h1>
-        <form class="reg-form" action="{{   route('student.store')  }}" method="POST">
+        <form class="reg-form" action="{{ route('student.store') }}" method="POST">
             @csrf
             <div class="form-elmt">
                 <label for="name">Name: </label>
@@ -19,15 +19,12 @@
             </div>
             <div class="form-elmt">
                 <label for="departments">Department: </label>
-                <select name="department" id="select_dpt">
+                <select name="department" class="select_dpt">
                     <option value="{{ null }}">-Select Department-</option>
-                    @foreach($departments as $department)
+                    @foreach ($departments as $department)
                         <option value="{{ $department }}"> {{ $department['deptName'] }} </option>
                     @endforeach
                 </select>
-            </div>
-            <div>
-
             </div>
             <div>
                 <button type="submit" class="submit">Submit</button>
