@@ -12,7 +12,10 @@ class StudentController extends Controller
     public function index()
     {
         $students = [];
-        $students = Student::all();
+        $students = Student::with('department')->get();
+        // $students = Student::all();
+
+        // $students = $students->with('department')->get();
 
         return view('student-pages.students', compact('students'));
     }
