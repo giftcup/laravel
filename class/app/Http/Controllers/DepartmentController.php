@@ -26,6 +26,7 @@ class DepartmentController extends Controller
     public function getDepartments() {
         $departments = [];
         $departments = Department::all();
+        
 
         return view('department-pages.departments')->with('departs', $departments);
     }

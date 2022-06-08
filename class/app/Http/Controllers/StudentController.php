@@ -71,12 +71,18 @@ class StudentController extends Controller
     public function editStudent(Request $request, $studentId)
     {
         $data = $request->all();
+        $department = $data['department'];
+        
+        if ($department !== null):
+            $dept = json_decode($department);
+        endif;
 
         Student::where('id', $studentId)
             ->update([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'matricule' => $data['matricule']
+                'matricule' => $data['matricule'],
+                'deptCode' => $dept->id
             ]);
 
         return redirect()->route('students');

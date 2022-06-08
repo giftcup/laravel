@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $department['deptCode'] }}</td>
                         <td>{{ $department['deptName'] }}</td>
-                        <td>Student</td>
+                        <td>{{ $department['totalStudents'] }}</td>
                         <td><a
                                 href="{{ route('department.edit', ['id' => $department['id']]) }}"><button>Edit</button></a>
                             <a
