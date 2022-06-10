@@ -17,7 +17,7 @@ class Courses extends Migration
             $table->id();
             $table->string('courseName', 100);
             $table->string('courseCode', 100);
-            $table->foreignId('deptCode')->nullable()->constrained('departments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('deptId')->nullable()->constrained('departments')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
