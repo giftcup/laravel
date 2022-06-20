@@ -26,6 +26,12 @@ class DepartmentController extends Controller
     public function getDepartments() {
         $departments = [];
         $departments = Department::all();
+
+        foreach ($departments as $department) {
+            $id = $department['id'];
+            $numStudents = Department::find($id)->student->count();
+            $department['numOfStudents'] = $numStudents;
+        }
         
 
         return view('department-pages.departments')->with('departs', $departments);

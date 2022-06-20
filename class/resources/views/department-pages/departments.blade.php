@@ -12,6 +12,11 @@
             </ul>
         </header>
         <section class="dept_info">
+            {{-- <p>
+                @foreach ($departs as $dept)
+                    {{ $dept }}
+                @endforeach
+            </p> --}}
             <table class="table-data">
                 <tr>
                     <th>Department Code</th>
@@ -23,7 +28,7 @@
                     <tr>
                         <td>{{ $department['deptCode'] }}</td>
                         <td>{{ $department['deptName'] }}</td>
-                        <td>{{ $department['totalStudents'] }}</td>
+                        <td>{{ $department['numOfStudents'] }}</td>
                         <td><a
                                 href="{{ route('department.edit', ['id' => $department['id']]) }}"><button>Edit</button></a>
                             <a
