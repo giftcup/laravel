@@ -10,7 +10,7 @@ class Department extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $table = 'departments';
+    // protected $table = 'departments';
 
     public function student() {
         return $this->hasMany(Student::class);

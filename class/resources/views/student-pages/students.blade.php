@@ -12,6 +12,7 @@
             </ul>
         </header>
         <section class="student-table">
+            <p><a href="{{ route('send-email') }}">Email</a></p>
             <table class="table-data">
                 <tr>
                     <th>Matricule</th>

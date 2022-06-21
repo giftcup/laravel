@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
 use Illuminate\Support\Facades\Route;
+use App\Mail\StudentAuthentication;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('stud
 Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('editStore');
 
 
+// Department Routes
+
 Route::get('/departments', [DepartmentController::class, 'getDepartments'])->name('departments');
 
 Route::get('/departments/add', [Department::class, 'addDepart'])->name('department.add');
@@ -45,3 +48,14 @@ Route::get('/departments/edit/{id}', [DepartmentController::class, 'editDeptPage
 Route::post('departments/{id}', [DepartmentController::class, 'editDepartment'])->name('edit.store');
 
 Route::get('departments/{id}', [DepartmentController::class, 'deleteDepartment'])->name('department.delete');
+
+
+// Email Routes
+
+Route::get('/send-mail', function () {
+
+    Mail::to('newuser@example.com')->send(new StudentAuthentication());
+
+    return 'A message has been sent to Mailtrap!';
+
+})->name('send-email');

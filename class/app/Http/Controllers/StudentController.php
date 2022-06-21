@@ -45,6 +45,10 @@ class StudentController extends Controller
         $student->matricule = $data['matricule'];
         $department = $data['department'];
 
+        /** 
+         * getting the department_id to add as a foreign key
+         * in student
+        */
         if ($department == null) :
             $student->department_id = null;
         else :

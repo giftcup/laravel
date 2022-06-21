@@ -10,7 +10,7 @@ class Course extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $table = 'courses';
+    // protected $table = 'courses';
 
     public function departments() {
         return $this->belongsTo(Department::class);
