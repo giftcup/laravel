@@ -20,17 +20,16 @@
                     <th>Department</th>
                     <th>Edit/Delete</th>
                 </tr>
-                {{-- <td>{{ $students }}</td> --}}
                 @foreach ($students as $student)
                     <tr>
                         <td>{{ $student['matricule'] }}</td>
                         <td>{{ $student['name'] }}</td>
                         <td>{{ $student['email'] }}</td>
                         <td>
-                            @if ($student['deptCode'] == null) 
+                            @if ($student['department'] == null)
                                 No Department
-                            @else 
-                                {{  $student['department']->deptName  }}
+                            @else
+                                {{ $student['department'] }}
                             @endif
                         </td>
                         <td>

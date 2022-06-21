@@ -12,10 +12,17 @@ class StudentController extends Controller
     public function index()
     {
         $students = [];
-        $students = Student::with('department')->get();
-        // $students = Student::all();
+        $students = Student::all();
 
-        // $students = $students->with('department')->get();
+        foreach ($students as $student) :
+            $id = $student['id'];
+            $department = Student::find($id)->department;
+            if ($department == null) :
+                $student['department'] = null;
+            else: 
+                $student['department'] = $department['deptName'];
+            endif;
+        endforeach;
 
         return view('student-pages.students', compact('students'));
     }
@@ -37,12 +44,12 @@ class StudentController extends Controller
         $student->email = $data['email'];
         $student->matricule = $data['matricule'];
         $department = $data['department'];
-        
-        if ($department == null):
-            $student->deptCode = null;
-        else:
+
+        if ($department == null) :
+            $student->department_id = null;
+        else :
             $dept = json_decode($department);
-            $student->deptCode = $dept->id;
+            $student->department_id = $dept->id;
         endif;
 
         $student->save();
@@ -60,20 +67,21 @@ class StudentController extends Controller
     public function edit($studentId)
     {
         $student = [];
-        $student = Student::where('id', $studentId)->first();
+        $student = Student::find($studentId);
+        $studentDept = Student::find($studentId)->department;
 
         $departments = [];
         $departments = Department::all();
 
-        return view('student-pages.edit', compact('student', 'departments'));
+        return view('student-pages.edit', compact('student', 'departments', 'studentDept'));
     }
 
     public function editStudent(Request $request, $studentId)
     {
         $data = $request->all();
         $department = $data['department'];
-        
-        if ($department !== null):
+
+        if ($department !== null) :
             $dept = json_decode($department);
         endif;
 
@@ -82,7 +90,7 @@ class StudentController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'matricule' => $data['matricule'],
-                'deptCode' => $dept->id
+                'department_id' => $dept->id
             ]);
 
         return redirect()->route('students');

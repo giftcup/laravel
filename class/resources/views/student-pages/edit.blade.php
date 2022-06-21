@@ -21,9 +21,17 @@
                 <div class="form-elmt">
                     <label for="departments">Department: </label>
                     <select name="department" class="select_dpt">
-                        <option value="{{ null }}">-Select Department-</option>
+                        @if ($studentDept == null)
+                            <option selected="selected" value="{{ null }}">No Department</option>
+                        @endif
                         @foreach ($departments as $department)
-                            <option value="{{ $department }}"> {{ $department['deptName'] }} </option>
+                            @if ($studentDept !== null && $department['id'] == $studentDept['id'])
+                                <option selected="selected" value="{{ $department }}">
+                                @else
+                                <option value="{{ $department }}">
+                            @endif
+                            {{ $department['deptName'] }}
+                            </option>
                         @endforeach
                     </select>
                 </div>

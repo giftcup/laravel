@@ -13,6 +13,6 @@ class Student extends Model
     protected $table = 'students';
 
     public function department() {
-        return $this->belongsTo(Department::class, 'deptCode');
+        return $this->belongsTo(Department::class);
     }
 }
