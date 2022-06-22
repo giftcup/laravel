@@ -39,7 +39,7 @@ Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('
 
 Route::get('/departments', [DepartmentController::class, 'getDepartments'])->name('departments');
 
-Route::get('/departments/add', [Department::class, 'addDepart'])->name('department.add');
+Route::get('/departments/add', [DepartmentController::class, 'addDepart'])->name('department.add');
 
 Route::post('/departments', [DepartmentController::class, 'storeDepart'])->name('department.store');
 
@@ -52,10 +52,6 @@ Route::get('departments/{id}', [DepartmentController::class, 'deleteDepartment']
 
 // Email Routes
 
-Route::get('/send-mail', function () {
+// Route::get('/confirm-account/{id}',  [StudentController::class, 'emailConfirmation'])->name('confirm-account');
 
-    Mail::to('newuser@example.com')->send(new StudentAuthentication());
-
-    return 'A message has been sent to Mailtrap!';
-
-})->name('send-email');
+Route::get('/send-mail/{id}/{email}', [StudentController::class, 'emailConfirmation'])->name('send-email');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Mail\StudentAuthentication;
+use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -57,8 +59,9 @@ class StudentController extends Controller
         endif;
 
         $student->save();
+        $studentId = $student->id;
 
-        return redirect()->route('students');
+        return redirect()->route('send-email', ['id' => $studentId, 'email' => $student->email]);
     }
 
     public function deleteStudent($studentId)
@@ -99,4 +102,10 @@ class StudentController extends Controller
 
         return redirect()->route('students');
     }
+
+    public function emailConfirmation($studentId, $studentEmail) {
+        Mail::to($studentEmail)->send(new StudentAuthentication($studentId));
+        return redirect()->route('students');
+    }
+
 }

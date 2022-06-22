@@ -1,9 +1,7 @@
-@extends('layouts/layout')
 
-@section('content')
+<h5>Hello there, </h5>
 
 <section>
-   <p>Welcome to email</p>
+   <p>You've been accepted to Schule</p>
+   <p>Check out your account details <a href="{{route('student.edit', ['id' => $studId])}}">here</a></p>
 </section>
-
-@endsection

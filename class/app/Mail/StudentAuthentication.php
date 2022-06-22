@@ -11,14 +11,16 @@ class StudentAuthentication extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $studentId;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($studentId)
     {
-        //
+        $this->studentId = $studentId;
     }
 
     /**
@@ -28,6 +30,8 @@ class StudentAuthentication extends Mailable
      */
     public function build()
     {
-        return $this->from('from@example.com', 'Mailtrap')->view('emails.newStudent');
+        return $this->from('laravel@example.com', 'Mailtrap')
+                    ->view('emails.newStudent')
+                    ->with('studId', $this->studentId);
     }
 }
