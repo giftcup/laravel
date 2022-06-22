@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
-use App\Mail\StudentAuthentication;
-use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +53,8 @@ Route::get('departments/{id}', [DepartmentController::class, 'deleteDepartment']
 // Route::get('/confirm-account/{id}',  [StudentController::class, 'emailConfirmation'])->name('confirm-account');
 
 Route::get('/send-mail/{id}/{email}', [StudentController::class, 'emailConfirmation'])->name('send-email');
+
+
+// Course Routes
+
+Route::get('/course/add', [CourseController::class, 'addCourse'])->name('add.course');
