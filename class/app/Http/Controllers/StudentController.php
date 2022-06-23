@@ -61,8 +61,8 @@ class StudentController extends Controller
 
         $student->save();
  
-        dispatch(new SendEmail($student->email, $student->id));
-        // Mail::to($student->email)->send(new StudentAuthentication($student->id));
+        SendEmail::dispatch($student->email, $student->id)->onQueue('emails');
+
         return redirect()->route('students');
     }
 

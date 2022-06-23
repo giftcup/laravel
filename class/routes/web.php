@@ -56,5 +56,4 @@ Route::get('/send-mail/{id}/{email}', [StudentController::class, 'emailConfirmat
 
 
 // Course Routes
-
 Route::get('/course/add', [CourseController::class, 'addCourse'])->name('add.course');
