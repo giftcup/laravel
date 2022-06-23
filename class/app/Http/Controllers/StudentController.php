@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Jobs\SendEmail;
 use App\Mail\StudentAuthentication;
 use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class StudentController extends Controller
             $department = Student::find($id)->department;
             if ($department == null) :
                 $student['department'] = null;
-            else: 
+            else :
                 $student['department'] = $department['deptName'];
             endif;
         endforeach;
@@ -50,7 +51,7 @@ class StudentController extends Controller
         /** 
          * getting the department_id to add as a foreign key
          * in student
-        */
+         */
         if ($department == null) :
             $student->department_id = null;
         else :
@@ -59,9 +60,10 @@ class StudentController extends Controller
         endif;
 
         $student->save();
-        $studentId = $student->id;
-
-        return redirect()->route('send-email', ['id' => $studentId, 'email' => $student->email]);
+ 
+        dispatch(new SendEmail($student->email, $student->id));
+        // Mail::to($student->email)->send(new StudentAuthentication($student->id));
+        return redirect()->route('students');
     }
 
     public function deleteStudent($studentId)
@@ -102,10 +104,4 @@ class StudentController extends Controller
 
         return redirect()->route('students');
     }
-
-    public function emailConfirmation($studentId, $studentEmail) {
-        Mail::to($studentEmail)->send(new StudentAuthentication($studentId));
-        return redirect()->route('students');
-    }
-
 }
