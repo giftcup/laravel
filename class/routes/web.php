@@ -15,36 +15,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+// Student Routes
+
 Route::get('/', [PageController::class, 'home'])->name('home');
-
 Route::get('students', [StudentController::class, 'index'])->name('students');
-
 Route::get('students/new', [StudentController::class, 'add'])->name('student.add');
-
 Route::post('/students', [StudentController::class, 'store'])->name('student.store');
-
 Route::get('/students/{id}', [StudentController::class, 'deleteStudent'])->name('student.delete');
-
 Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
-
 Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('editStore');
+Route::get('/student/{id}/register-courses', [StudentController::class, 'registerCourses'])->name('register');
+Route::post('/students/{id}', [StudentController::class, 'saveCourse'])->name('save.course');
+Route::get('/student/{id}', [StudentController::class, 'studentInfo'])->name('student.info');
 
 
 // Department Routes
 
 Route::get('/departments', [DepartmentController::class, 'getDepartments'])->name('departments');
-
 Route::get('/departments/add', [DepartmentController::class, 'addDepart'])->name('department.add');
-
 Route::post('/departments', [DepartmentController::class, 'storeDepart'])->name('department.store');
-
 Route::get('/departments/edit/{id}', [DepartmentController::class, 'editDeptPage'])->name('department.edit');
-
 Route::post('departments/{id}', [DepartmentController::class, 'editDepartment'])->name('edit.store');
-
 Route::get('departments/{id}', [DepartmentController::class, 'deleteDepartment'])->name('department.delete');
 
 
@@ -56,4 +47,6 @@ Route::get('/send-mail/{id}/{email}', [StudentController::class, 'emailConfirmat
 
 
 // Course Routes
+Route::get('/course', [CourseController::class, 'showCourses'])->name('courses');
 Route::get('/course/add', [CourseController::class, 'addCourse'])->name('add.course');
+Route::post('/course/add', [CourseController::class, 'storeCourse'])->name('course.store');

@@ -8,15 +8,14 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    // public function showCourses($deptId) {
-    //     $courses = [];
-    //     $courses = Course::with('department')->where('department.id' == $deptId)->get();
-
-    // }
+    public function showCourses() {
+        return 'hello world';
+    }
 
     public function addCourse() {
         $departments = [];
         $departments = Department::all();
+        // return $departments;
 
         return view('course-pages.addCourse', compact('departments'));
     }
@@ -36,7 +35,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return;
+        return redirect()->route('add.course');
     }
 
     public function deleteCourse($courseId)

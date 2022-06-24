@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Department;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Jobs\SendEmail;
-use App\Mail\StudentAuthentication;
-use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -60,8 +59,8 @@ class StudentController extends Controller
         endif;
 
         $student->save();
- 
-        SendEmail::dispatch($student->email, $student->id)->onQueue('emails');
+
+        SendEmail::dispatch($student->email, $student->id);
 
         return redirect()->route('students');
     }
@@ -103,5 +102,38 @@ class StudentController extends Controller
             ]);
 
         return redirect()->route('students');
+    }
+
+    public function registerCourses()
+    {
+        $courses = [];
+        $courses = Course::all();
+
+        return view('student-pages.register-courses', compact('courses'));
+    }
+
+    public function saveCourse(Request $req, $studentId)
+    {
+        $data = $req->all();
+        $courses = $data['course'];
+
+        $student = Student::find($studentId);
+
+        foreach ($courses as $courseId) :
+            $course = Course::find($courseId);
+            $student->course()->attach($course);
+        endforeach;
+        return redirect()->route('students');
+    }
+
+    public function studentInfo($studentId)
+    {
+        $student = [];
+        $student = Student::find($studentId);
+        $department = Student::find($studentId)->department;
+        $course = $student->course;
+        $student['department'] = $department->deptName;
+        return ($student);
+        // return ($courses);
     }
 }
