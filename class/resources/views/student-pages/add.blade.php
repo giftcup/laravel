@@ -3,8 +3,12 @@
 @section('content')
     <main class="add-form">
         <h1 id="form-ttl">Add Student</h1>
-        <form class="reg-form" action="{{ route('student.store') }}" method="POST">
+        <form class="reg-form" action="{{ route('student.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
+            <div class="form-elmt">
+                <label for="profile">Upload Profile Photo</label>
+                <input type="file" name="profile" accept="image/png image/jpg image/jpeg">
+            </div>
             <div class="form-elmt">
                 <label for="name">Name: </label>
                 <input type="text" name="name">

@@ -39,12 +39,24 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required'],
+            'matricule' => ['required', 'unique:students,matricule'],
+            'department' => ['required'],
+            'profile' => ['required', 'mimes:jpg, png, jpeg', 'max:50482']
+        ]);
+
         $data = $request->all();
+
+        $newImageName = time().'-'.$data['matricule'].'.'.$data['profile']->extension();
+        $data['profile']->move(public_path('images'), $newImageName);
 
         $student = new Student;
         $student->name = $data['name'];
         $student->email = $data['email'];
         $student->matricule = $data['matricule'];
+        $student->image_path = $newImageName;
         $department = $data['department'];
 
         /** 
@@ -60,7 +72,7 @@ class StudentController extends Controller
 
         $student->save();
 
-        SendEmail::dispatch($student->email, $student->id);
+        SendEmail::dispatch($student->email, $student->id)->onQueue('emails');
 
         return redirect()->route('students');
     }

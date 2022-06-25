@@ -4,6 +4,7 @@
     <main>
         <div class="add-form">
             <h1 id="form-ttl">Edit Student Info</h1>
+            <img src="{{ asset('images/', $student['image_path']) }}" alt="image">
             <form class="reg-form" action="{{ route('editStore', ['id' => $student['id']]) }}" method="POST">
                 @csrf
                 <div class="form-elmt">
