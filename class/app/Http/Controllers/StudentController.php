@@ -7,7 +7,7 @@ use App\Models\Department;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Jobs\SendEmail;
-// use Illuminate\Support\Facades\DB;
+use Image;
 
 class StudentController extends Controller
 {
@@ -49,8 +49,11 @@ class StudentController extends Controller
 
         $data = $request->all();
 
+        $image = $request->profile;
         $newImageName = time().'-'.$data['matricule'].'.'.$data['profile']->extension();
-        $data['profile']->move(public_path('images'), $newImageName);
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->resize(100,100);
+        $image_resize->save(public_path('images/'.$newImageName));
 
         $student = new Student;
         $student->name = $data['name'];
