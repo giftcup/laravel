@@ -23,7 +23,7 @@ Route::get('students/new', [StudentController::class, 'add'])->name('student.add
 Route::post('/students', [StudentController::class, 'store'])->name('student.store');
 Route::get('/students/{id}', [StudentController::class, 'deleteStudent'])->name('student.delete');
 Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
-Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('editStore');
+Route::post('/students/{id}', [StudentController::class, 'editStudent'])->name('edit.store');
 Route::get('/student/{id}/register-courses', [StudentController::class, 'registerCourses'])->name('register');
 Route::post('/students/{id}', [StudentController::class, 'saveCourse'])->name('save.course');
 Route::get('/student/{id}', [StudentController::class, 'studentInfo'])->name('student.info');

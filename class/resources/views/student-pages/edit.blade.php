@@ -5,7 +5,7 @@
         <div class="add-form">
             <h1 id="form-ttl">Edit Student Info</h1>
             <img src="{{ asset('images/'. $student['image_path']) }}" alt="image">
-            {{-- <form class="reg-form" action="{{ route('editStore', ['id' => $student['id']]) }}" method="POST">
+            <form class="reg-form" action="{{ route('edit.store', ['id' => $student['id']]) }}" method="POST">
                 @csrf
                 <div class="form-elmt">
                     <label>Name: </label>
@@ -39,7 +39,7 @@
                 <div>
                     <button type="submit" class="submit">Edit</button>
                 </div>
-            </form> --}}
+            </form>
         </div>
     </main>
 @endsection

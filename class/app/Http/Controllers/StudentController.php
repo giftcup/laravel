@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Jobs\SendEmail;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class StudentController extends Controller
@@ -82,6 +83,8 @@ class StudentController extends Controller
 
     public function deleteStudent($studentId)
     {
+        $student = Student::find($studentId);
+        Storage::delete(public_path('images/'.$student['image_path']));
         Student::destroy($studentId);
 
         return redirect()->route('students');
