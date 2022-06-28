@@ -11,8 +11,28 @@
                 <li class="sub-actions-li"><a href="{{ route('student.add') }}"> Add Student</a></li>
             </ul>
         </header>
+        <section>
+            <form action="{{ route('students') }}" class="sort_search" method="GET">
+                <div class="form-elmt">
+                    <label for="order_by">Order By: </label>
+                    <select name="order_by" class="select">
+                        <option value="name">Student Name</option>
+                        <option value="matricule">Matricule</option>
+                        <option value="department_id">Department</option>
+                        <option value="created_at">Created Time</option>
+                    </select>
+                </div>
+                <div class="form-elmt">
+                    <label for="order">Order</label>
+                    <select name="order" class="select">
+                        <option value="ASC">Ascending</option>
+                        <option value="DESC">Descending</option>
+                    </select>
+                </div>
+                <button class="btn">Order</button>
+            </form>
+        </section>
         <section class="student-table">
-            {{-- <p><a href="{{ route('send-email', ['id' => 22, 'email' => 'salime@yahoo.com']) }}">Email</a></p> --}}
             <table class="table-data">
                 <tr>
                     <th>Matricule</th>

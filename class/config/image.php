@@ -15,6 +15,7 @@ return [
     |
     */
 
-    'driver' => 'gd'
-
+    'driver' => 'gd',
+    'width' => env('IMAGE_WIDTH', 100),
+    'height' => env('IMAGE_HEIGHT', 100)
 ];

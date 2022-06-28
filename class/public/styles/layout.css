@@ -73,7 +73,7 @@ nav {
     margin-bottom: 1rem;
 }
 
-.form-elmt input, .select_dpt{
+.form-elmt input, .select_dpt, .select{
     padding: 1rem;
     font-family: inherit;
     font-size: 100%;
@@ -83,7 +83,11 @@ nav {
     background-color: #fff;
 }
 
-.table-data button {
+.select {
+    width: 70%;
+}
+
+.table-data button, .btn {
     font-weight: bold;
     font-family: inherit;
     font-size: 90%;
@@ -182,4 +186,13 @@ td a {
 .sub-actions-li a:hover{
     background-color: #280107;
     color: #FFFBFF;
+}
+
+.prof_img {
+    border-radius: 50%;
+}
+
+.sort_search {
+    display: flex;
+    width: 60%;
 }

@@ -6,7 +6,7 @@
             <h1 id="form-ttl">Edit Department</h1>
             <div id="underline"> </div>
         </section>
-        <form class="reg-form" action="{{ route('edit.store', ['id' => $dpt['id']]) }}" method="POST">
+        <form class="reg-form" action="{{ route('edit.dept', ['id' => $dpt['id']]) }}" method="POST">
             @csrf
             <div class="form-elmt">
                 <p>Department Name: </p>

@@ -18,7 +18,7 @@ class Students extends Migration
             $table->string('name', 100);
             $table->string('email', 100);
             $table->string('matricule', 9);
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

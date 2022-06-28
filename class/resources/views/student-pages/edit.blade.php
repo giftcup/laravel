@@ -4,8 +4,12 @@
     <main>
         <div class="add-form">
             <h1 id="form-ttl">Edit Student Info</h1>
-            <img src="{{ asset('images/'. $student['image_path']) }}" alt="image">
-            <form class="reg-form" action="{{ route('edit.store', ['id' => $student['id']]) }}" method="POST">
+            @if ($student['image_path'] == null)
+                <img class="prof_img" src="{{  asset('images/default.jpg')  }}" alt="">
+            @else
+                <img class="prof_img" src="{{ asset('images/'. $student['image_path']) }}" alt="image">
+            @endif
+            <form class="reg-form" action="{{ route('edit.stud', ['id' => $student['id']]) }}" method="POST">
                 @csrf
                 <div class="form-elmt">
                     <label>Name: </label>

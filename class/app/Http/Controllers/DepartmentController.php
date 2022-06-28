@@ -7,11 +7,13 @@ use App\Models\Department;
 
 class DepartmentController extends Controller
 {
-    public function addDepart() {
+    public function addDepart()
+    {
         return view('department-pages.add-dept');
     }
 
-    public function storeDepart(Request $request) {
+    public function storeDepart(Request $request)
+    {
         $data = $request->all();
 
         $department = new Department;
@@ -23,7 +25,8 @@ class DepartmentController extends Controller
         return redirect()->route('departments');
     }
 
-    public function getDepartments() {
+    public function getDepartments()
+    {
         $departments = [];
         $departments = Department::all();
 
@@ -32,31 +35,34 @@ class DepartmentController extends Controller
             $numStudents = Department::find($id)->student->count();
             $department['numOfStudents'] = $numStudents;
         }
-        
+
 
         return view('department-pages.departments')->with('departs', $departments);
     }
 
-    public function editDeptPage($deptId) {
+    public function editDeptPage($deptId)
+    {
         $department = [];
         $department = Department::where('id', $deptId)->first();
 
         return view('department-pages.edit-dept')->with('dpt', $department);
     }
 
-    public function editDepartment(Request $req, $deptId) {
+    public function editDepartment(Request $req, $deptId)
+    {
         $data = $req->all();
 
         Department::where('id', $deptId)
-               ->update([
-                   'deptCode' => $data['code'],
-                   'deptName' => $data['name']
-               ]);
+            ->update([
+                'deptCode' => $data['code'],
+                'deptName' => $data['name']
+            ]);
 
         return redirect()->route('departments');
     }
 
-    public function deleteDepartment($deptId) {
+    public function deleteDepartment($deptId)
+    {
         Department::destroy($deptId);
 
         return redirect()->route('departments');

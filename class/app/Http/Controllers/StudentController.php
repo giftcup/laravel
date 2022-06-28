@@ -12,10 +12,14 @@ use Image;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $order_by = $request->get('order_by');
+        $order = $request->get('order');
+        // dd([$order_by, $order]);
+
         $students = [];
-        $students = Student::all();
+        $students = Student::all()->sortBy($order_by);
 
         foreach ($students as $student) :
             $id = $student['id'];
@@ -26,6 +30,12 @@ class StudentController extends Controller
                 $student['department'] = $department['deptName'];
             endif;
         endforeach;
+        $students->toJson();
+        dd($students);
+        // $output = print_r($students,1);
+        // dd($output);
+
+        // // sort($students);
 
         return view('student-pages.students', compact('students'));
     }
@@ -42,19 +52,24 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'email' => ['required'],
+            'email' => ['required', 'unique:students'],
             'matricule' => ['required', 'unique:students,matricule'],
             'department' => ['required'],
-            'profile' => ['required', 'mimes:jpg, png, jpeg', 'max:50482']
+            'profile' => ['nullable', 'mimes:jpg, png, jpeg', 'max:50482']
         ]);
 
         $data = $request->all();
+        $height = config('image.height', 100);
+        $width = config('image.width', 100);
 
         $image = $request->profile;
-        $newImageName = time().'-'.$data['matricule'].'.'.$data['profile']->extension();
-        $image_resize = Image::make($image->getRealPath());
-        $image_resize->resize(100,100);
-        $image_resize->save(public_path('images/'.$newImageName));
+        $newImageName = null;
+        if ($image != null) :
+            $newImageName = time() . '-' . $data['matricule'] . '.' . $data['profile']->extension();
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize($width, $height);
+            $image_resize->save(public_path('images/' . $newImageName));
+        endif;
 
         $student = new Student;
         $student->name = $data['name'];
@@ -62,7 +77,6 @@ class StudentController extends Controller
         $student->matricule = $data['matricule'];
         $student->image_path = $newImageName;
         $department = $data['department'];
-
         /** 
          * getting the department_id to add as a foreign key
          * in student
@@ -84,7 +98,7 @@ class StudentController extends Controller
     public function deleteStudent($studentId)
     {
         $student = Student::find($studentId);
-        Storage::delete(public_path('images/'.$student['image_path']));
+        Storage::delete(public_path('images/' . $student['image_path']));
         Student::destroy($studentId);
 
         return redirect()->route('students');
