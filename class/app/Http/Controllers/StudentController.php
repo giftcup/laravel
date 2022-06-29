@@ -16,10 +16,17 @@ class StudentController extends Controller
     {
         $order_by = $request->get('order_by');
         $order = $request->get('order');
+
+        if ($order_by == null || $order == null) {
+            $order_by = "created_at";
+            $order = "DESC";
+        }
         // dd([$order_by, $order]);
 
         $students = [];
-        $students = Student::all()->sortBy($order_by);
+        $students = Student::orderBy($order_by, $order)
+                            ->get();
+        
 
         foreach ($students as $student) :
             $id = $student['id'];
@@ -30,12 +37,6 @@ class StudentController extends Controller
                 $student['department'] = $department['deptName'];
             endif;
         endforeach;
-        $students->toJson();
-        dd($students);
-        // $output = print_r($students,1);
-        // dd($output);
-
-        // // sort($students);
 
         return view('student-pages.students', compact('students'));
     }
@@ -116,7 +117,7 @@ class StudentController extends Controller
         return view('student-pages.edit', compact('student', 'departments', 'studentDept'));
     }
 
-    public function editStudent(Request $request, $studentId)
+    public function editStudent(Request $request,  Student $studentId)
     {
         $data = $request->all();
         $department = $data['department'];
@@ -125,7 +126,7 @@ class StudentController extends Controller
             $dept = json_decode($department);
         endif;
 
-        Student::where('id', $studentId)
+        $studentId
             ->update([
                 'name' => $data['name'],
                 'email' => $data['email'],

@@ -29,7 +29,7 @@
                         <option value="DESC">Descending</option>
                     </select>
                 </div>
-                <button class="btn">Order</button>
+                <button type="submit" class="btn">Order</button>
             </form>
         </section>
         <section class="student-table">
