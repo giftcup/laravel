@@ -14,31 +14,31 @@ class StudentController extends Controller
 {
     public function index(Request $request)
     {
-        $order_by = $request->get('order_by');
-        $order = $request->get('order');
+        $order_by = "created_at";
+        $order = "DESC";
+        $search_field = 'name';
+        $search = null;
 
-        if ($order_by == null || $order == null) {
-            $order_by = "created_at";
-            $order = "DESC";
-        }
-        // dd([$order_by, $order]);
+        if ($request->has('order_by')) :
+            $order_by = $request->order_by;
+            $order = $request->order;
+            $search = $request->search;
+        endif;
 
-        $students = [];
-        $students = Student::orderBy($order_by, $order)
-                            ->get();
-        
 
-        foreach ($students as $student) :
-            $id = $student['id'];
-            $department = Student::find($id)->department;
-            if ($department == null) :
-                $student['department'] = null;
-            else :
-                $student['department'] = $department['deptName'];
-            endif;
-        endforeach;
+        // $studs = Student::with('department')
+        //                 ->orderBy(Department::select('deptName')->whereColumn('students.department_id', 'departments.id'))
+        //                 ->get(); 
 
-        return view('student-pages.students', compact('students'));
+        $studs = Student::select(['students.*', 'departments.deptName as dept_name'])
+            ->leftJoin('departments', 'students.department_id', 'departments.id')
+            ->orderBy($order_by, $order)
+            ->where('students.name' , 'LIKE', '%' . $search . '%')
+            ->orWhere('students.matricule', 'LIKE', '%' . $search . '%')
+            ->orWhere('departments.deptName', 'LIKE', '%' . $search . '%')  
+            ->get();
+
+        return view('student-pages.students', compact('order_by', 'order', 'search_field', 'search'))->with('students', $studs);
     }
 
     public function add()

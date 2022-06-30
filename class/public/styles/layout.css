@@ -192,7 +192,14 @@ td a {
     border-radius: 50%;
 }
 
+.sort {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
 .sort_search {
     display: flex;
-    width: 60%;
+    align-items: stretch;
+    flex-direction: column;
 }

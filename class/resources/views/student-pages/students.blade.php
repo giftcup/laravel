@@ -11,25 +11,42 @@
                 <li class="sub-actions-li"><a href="{{ route('student.add') }}"> Add Student</a></li>
             </ul>
         </header>
-        <section>
-            <form action="{{ route('students') }}" class="sort_search" method="GET">
+        <section class="sort_search">
+            @php
+                $options = [
+                    'name' => 'Student Name',
+                    'matricule' => 'Matricule',
+                    'departments.deptName' => 'Department Name',
+                    'created_at' => 'Created At',
+                ];
+            @endphp
+
+            <form action="{{ route('students') }}" class="sort" method="GET">
                 <div class="form-elmt">
                     <label for="order_by">Order By: </label>
                     <select name="order_by" class="select">
-                        <option value="name">Student Name</option>
-                        <option value="matricule">Matricule</option>
-                        <option value="department_id">Department</option>
-                        <option value="created_at">Created Time</option>
+                        @foreach ($options as $option => $name)
+                            <option value={{ $option }} {{ $option == $order_by ? 'selected' : ' ' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-elmt">
                     <label for="order">Order</label>
                     <select name="order" class="select">
-                        <option value="ASC">Ascending</option>
-                        <option value="DESC">Descending</option>
+                        @foreach (['ASC' => 'Ascending', 'DESC' => 'Descending'] as $key => $value)
+                            <option value={{ $key }} {{ $key == $order ? 'selected' : ' ' }}>
+                                {{ $value }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn">Order</button>
+                <div class="form-elmt">
+                    <input id="search_input" type="text" name="search"
+                        {{ $search != null ? 'value =' . $search : 'placeholder =' . 'Search' }}>
+                </div>
+                <button type="submit" class="btn">Search</button>
             </form>
         </section>
         <section class="student-table">
@@ -50,7 +67,7 @@
                             @if ($student['department'] == null)
                                 No Department
                             @else
-                                {{ $student['department'] }}
+                                {{ $student->department->deptName }}
                             @endif
                         </td>
                         <td>
@@ -60,6 +77,7 @@
                     </tr>
                 @endforeach
             </table>
+        </section>
         </section>
     </main>
 @endsection
