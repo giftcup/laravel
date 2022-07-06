@@ -16,18 +16,22 @@ class SendEmail implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $email;
-    protected $id;
+    protected $student;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($studentEmail, $studentId)
+    public function __construct($student)
     {
         // assigning email and ids of student as job members
-        $this->email = $studentEmail;
-        $this->id = $studentId;
+        $this->email = $student->email;
+        $this->student = [
+            "id" => $student->id,
+            "name" => $student->name,
+            "matricule" => $student->matricule
+        ];
     }
 
     /**
@@ -37,6 +41,6 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new StudentAuthentication($this->id));
+        Mail::to($this->email)->send(new StudentAuthentication($this->student));
     }
 }

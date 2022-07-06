@@ -25,11 +25,6 @@ class StudentController extends Controller
             $search = $request->search;
         endif;
 
-
-        // $studs = Student::with('department')
-        //                 ->orderBy(Department::select('deptName')->whereColumn('students.department_id', 'departments.id'))
-        //                 ->get(); 
-
         $studs = Student::select(['students.*', 'departments.deptName as dept_name'])
             ->leftJoin('departments', 'students.department_id', 'departments.id')
             ->orderBy($order_by, $order)
@@ -78,6 +73,7 @@ class StudentController extends Controller
         $student->matricule = $data['matricule'];
         $student->image_path = $newImageName;
         $department = $data['department'];
+
         /** 
          * getting the department_id to add as a foreign key
          * in student
@@ -90,8 +86,8 @@ class StudentController extends Controller
         endif;
 
         $student->save();
-
-        SendEmail::dispatch($student->email, $student->id)->onQueue('emails');
+        
+        SendEmail::dispatch($student);
 
         return redirect()->route('students');
     }
@@ -119,6 +115,13 @@ class StudentController extends Controller
 
     public function editStudent(Request $request,  Student $studentId)
     {
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'unique:students'],
+            'matricule' => ['required', 'unique:students,matricule'],
+            'department' => ['required']
+        ]);
+
         $data = $request->all();
         $department = $data['department'];
 

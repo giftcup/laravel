@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="add-form">
-        <h1 id="form-ttl">Add Student</h1>
+        <h1 class="fw-bold fs-2" id="form-ttl">Add Student</h1>
         <form class="reg-form" action="{{ route('student.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="form-elmt">

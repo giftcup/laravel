@@ -4,11 +4,11 @@
     <main class="page">
         <header class="page_header">
             <section class="dept_ttl">
-                <h1>Students</h1>
+                <h1 class="fs-3 fw-bold">Students</h1>
                 <div id="underline"> </div>
             </section>
             <ul class="sub-actions">
-                <li class="sub-actions-li"><a href="{{ route('student.add') }}"> Add Student</a></li>
+                <li class="sub-actions-li"><a href="{{ route('student.add') }}">Add Student</a></li>
             </ul>
         </header>
         <section class="sort_search">
@@ -50,7 +50,7 @@
             </form>
         </section>
         <section class="student-table">
-            <table class="table-data">
+            <table class="table table-striped table-data">
                 <tr>
                     <th>Matricule</th>
                     <th>Name</th>

@@ -52,3 +52,7 @@ Route::get('/send-mail/{id}/{email}', [StudentController::class, 'emailConfirmat
 Route::get('/course', [CourseController::class, 'showCourses'])->name('courses');
 Route::get('/course/add', [CourseController::class, 'addCourse'])->name('add.course');
 Route::post('/course/add', [CourseController::class, 'storeCourse'])->name('course.store');
+
+Route::get('signup', function() {
+    return view('auth.signup');
+})->name('signup');
