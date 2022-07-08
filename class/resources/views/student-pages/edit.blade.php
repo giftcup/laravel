@@ -9,7 +9,7 @@
             @else
                 <img class="prof_img" src="{{ asset('images/'. $student['image_path']) }}" alt="image">
             @endif
-            <form class="reg-form" action="{{ route('stud', ['id' => $student['id']]) }}" method="POST">
+            <form class="reg-form" action="{{ route('student.edited', ['id' => $student['id']]) }}" method="POST">
                 @csrf
                 <div class="form-elmt">
                     <label>Name: </label>

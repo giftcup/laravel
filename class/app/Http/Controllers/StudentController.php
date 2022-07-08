@@ -19,11 +19,11 @@ class StudentController extends Controller
         $search_field = 'name';
         $search = null;
 
-        if ($request->has('order_by')) :
+        if ($request->has('order_by')) {
             $order_by = $request->order_by;
             $order = $request->order;
             $search = $request->search;
-        endif;
+        }
 
         $studs = Student::select(['students.*', 'departments.deptName as dept_name'])
             ->leftJoin('departments', 'students.department_id', 'departments.id')
@@ -60,12 +60,12 @@ class StudentController extends Controller
 
         $image = $request->profile;
         $newImageName = null;
-        if ($image != null) :
+        if ($image != null) {
             $newImageName = time() . '-' . $data['matricule'] . '.' . $data['profile']->extension();
             $image_resize = Image::make($image->getRealPath());
             $image_resize->resize($width, $height);
             $image_resize->save(public_path('images/' . $newImageName));
-        endif;
+        }
 
         $student = new Student;
         $student->name = $data['name'];
@@ -78,12 +78,12 @@ class StudentController extends Controller
          * getting the department_id to add as a foreign key
          * in student
          */
-        if ($department == null) :
+        if ($department == null)
             $student->department_id = null;
-        else :
+        else {
             $dept = json_decode($department);
             $student->department_id = $dept->id;
-        endif;
+        }
 
         $student->save();
         
@@ -125,9 +125,9 @@ class StudentController extends Controller
         $data = $request->all();
         $department = $data['department'];
 
-        if ($department !== null) :
+        if ($department !== null) {
             $dept = json_decode($department);
-        endif;
+        }
 
         $studentId
             ->update([
@@ -155,10 +155,11 @@ class StudentController extends Controller
 
         $student = Student::find($studentId);
 
-        foreach ($courses as $courseId) :
+        foreach ($courses as $courseId) {
             $course = Course::find($courseId);
             $student->course()->attach($course);
-        endforeach;
+        }
+
         return redirect()->route('students');
     }
 

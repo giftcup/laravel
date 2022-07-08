@@ -35,7 +35,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->route('add.course');
+        return redirect()->route('course.add');
     }
 
     public function deleteCourse($courseId)
