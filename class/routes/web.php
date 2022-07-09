@@ -24,10 +24,12 @@ Route::controller(StudentController::class)->name('student.')->group(function() 
     Route::post('students', 'store')->name('store');
     Route::get('students/{id}', 'deleteStudent')->name('delete');
     Route::get('student/{id}/edit', 'edit')->name('edit');
-    Route::post('students/{id}', 'editStudent')->name('edited');
+    Route::post('/students/{id}', 'editStudent')->name('edited');
     Route::get('student/{id}/register-courses', 'registerCourses')->name('register');
     Route::post('/students/{id}', 'saveCourses')->name('courses');
     Route::get('/student/{id}', 'studentInfo')->name('info');
+    Route::get('/signup', 'signupPage')->name('signup-page');
+    Route::post('/signup/{matricule}', 'signup')->name('signup');
 });
 
 Route::get('/students', [StudentController::class, 'index'])->name('students');
@@ -51,7 +53,3 @@ Route::controller(CourseController::class)->name('course.')->group(function() {
 });
 
 Route::get('/course', [CourseController::class, 'showCourses'])->name('courses');
-
-Route::get('signup', function() {
-    return view('auth.signup');
-})->name('signup');

@@ -1,7 +1,6 @@
-<h5>Hello {{ $name }}, </h5>
+<p>Hello <b>{{ $name }}</b>, </p>
 
 <section>
-    <p>You've been accepted to Schule</p>
-    <p>Please create your account <a href="{{ route('signup') }}}">here</a>. You're matricule is <b>{{ $matricule }}</b></p>
-    <p>Check out your account details <a href="{{ route('student.edit', ['id' => $studId]) }}">here</a></p>
+    <p>Congratulations!! You've been accepted to Schule</p>
+    <p>You're matricule is <b>{{ $matricule }}</b>, use it to create your account <a href="http://127.0.0.1:8000/signup">here</a>.</p>
 </section>

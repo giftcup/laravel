@@ -7,11 +7,33 @@ use App\Models\Department;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Jobs\SendEmail;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use Image;
 
 class StudentController extends Controller
 {
+    public function signupPage() {
+        return view('auth.signup');
+    }
+
+    public function signup(Request $request, Student $matricule) {
+        // $request->validate([
+        //     'matricule' => ['required'],
+        //     'password' => ['required']
+        // ]);
+        dd([$matricule, $request['password']]);
+        if ($request['matricule'] != $matricule) {
+            return redirect()->route('student.signup', ['matricule' => $matricule]);
+        }
+        
+        Student::where('matricule', $matricule)
+                ->update([
+                    'password' => Hash::make($request['password'])
+                ]);
+
+        // dd([$student, $request->all()]);
+    }
+
     public function index(Request $request)
     {
         $order_by = "created_at";
@@ -94,8 +116,6 @@ class StudentController extends Controller
 
     public function deleteStudent($studentId)
     {
-        $student = Student::find($studentId);
-        Storage::delete(public_path('images/' . $student['image_path']));
         Student::destroy($studentId);
 
         return redirect()->route('students');
