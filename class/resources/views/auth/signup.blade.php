@@ -3,7 +3,7 @@
 @section('content')
     <main class="add-form">
         <h1 class="fw-bold fs-2" id="form-ttl">Signup</h1>
-        <form  class="reg-form" action="{{ route('student.signup', ['matricule' => 'FE20A111']) }}" method="POST">
+        <form  class="reg-form" action="{{ route('student.signup', ['matricule'=>"FE22A023"]) }}" method="POST">
             @csrf
             <div class="mb-3  w-75">
                 <label for="matricule" class="form-label">Matricule</label>

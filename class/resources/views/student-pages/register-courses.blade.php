@@ -3,7 +3,7 @@
 @section('content')
     <h1>Register Courses</h1>
     <main>
-        <form class="reg-form" action="{{ route('student.courses', ['id'=>22]) }}" method="POST">
+        <form class="reg-form" action="{{ route('student.courses', ['id' => 22]) }}" method="POST">
             @csrf
             @foreach ($courses as $course)
                 <div>

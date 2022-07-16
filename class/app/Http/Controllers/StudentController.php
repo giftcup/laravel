@@ -16,22 +16,22 @@ class StudentController extends Controller
         return view('auth.signup');
     }
 
-    public function signup(Request $request, Student $matricule) {
-        // $request->validate([
-        //     'matricule' => ['required'],
-        //     'password' => ['required']
-        // ]);
-        dd([$matricule, $request['password']]);
+    public function signup(Request $request, $matricule) {
+        $request->validate([
+            'matricule' => ['required'],
+            'password' => ['required']
+        ]);
+        // dd([$matricule, $request['password']]);
         if ($request['matricule'] != $matricule) {
-            return redirect()->route('student.signup', ['matricule' => $matricule]);
+            return redirect()->route('student.signup-page');
         }
         
         Student::where('matricule', $matricule)
                 ->update([
                     'password' => Hash::make($request['password'])
                 ]);
-
-        // dd([$student, $request->all()]);
+        
+        return redirect()->route('students');
     }
 
     public function index(Request $request)

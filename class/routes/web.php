@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'home'])->name('home');
 
 Route::controller(StudentController::class)->name('student.')->group(function() {
+    Route::get('/signup', 'signupPage')->name('signup-page');
+    Route::post('/signup/{matricule}', 'signup')->name('signup');
     Route::get('students/new', 'add')->name('add');
     Route::post('students', 'store')->name('store');
     Route::get('students/{id}', 'deleteStudent')->name('delete');
@@ -28,8 +30,6 @@ Route::controller(StudentController::class)->name('student.')->group(function() 
     Route::get('student/{id}/register-courses', 'registerCourses')->name('register');
     Route::post('/students/{id}', 'saveCourses')->name('courses');
     Route::get('/student/{id}', 'studentInfo')->name('info');
-    Route::get('/signup', 'signupPage')->name('signup-page');
-    Route::post('/signup/{matricule}', 'signup')->name('signup');
 });
 
 Route::get('/students', [StudentController::class, 'index'])->name('students');
