@@ -11,11 +11,9 @@ class StudentAuthentication extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $studentId;
     protected $name;
     protected $matricule;
-
-    protected $student;
+    protected $verification_code;
 
     /**
      * Create a new message instance.
@@ -24,9 +22,9 @@ class StudentAuthentication extends Mailable implements ShouldQueue
      */
     public function __construct($student)
     {
-        $this->studentId = $student['id'];
         $this->name = $student['name'];
         $this->matricule = $student['matricule'];
+        $this->verification_code = $student['verification_code'];
     }
 
     /**
@@ -39,9 +37,9 @@ class StudentAuthentication extends Mailable implements ShouldQueue
         return $this->from('schule@school.com', 'Mailtrap')
                     ->view('emails.newStudent')
                     ->with([
-                        'studId'=> $this->studentId,
                         'name' => $this->name,
-                        'matricule' => $this->matricule
+                        'matricule' => $this->matricule,
+                        'verification_code' => $this->verification_code
                     ]);
     }
 }

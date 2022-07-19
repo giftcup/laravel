@@ -28,7 +28,7 @@ class SendEmail implements ShouldQueue
         // assigning email and ids of student as job members
         $this->email = $student->email;
         $this->student = [
-            "id" => $student->id,
+            "verification_code" => $student->verification_code,
             "name" => $student->name,
             "matricule" => $student->matricule
         ];

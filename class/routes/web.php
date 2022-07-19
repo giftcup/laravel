@@ -21,7 +21,7 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 
 Route::controller(StudentController::class)->name('student.')->group(function() {
     Route::get('/signup', 'signupPage')->name('signup-page');
-    Route::post('/signup/{matricule}', 'signup')->name('signup');
+    Route::post('/signup', 'signup')->name('signup');
     Route::get('students/new', 'add')->name('add');
     Route::post('students', 'store')->name('store');
     Route::get('students/{id}', 'deleteStudent')->name('delete');

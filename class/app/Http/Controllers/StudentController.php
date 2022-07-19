@@ -16,17 +16,16 @@ class StudentController extends Controller
         return view('auth.signup');
     }
 
-    public function signup(Request $request, $matricule) {
+    public function signup(Request $request) {
         $request->validate([
             'matricule' => ['required'],
-            'password' => ['required']
+            'verification_code' => ['required'],
+            'password' => ['required', 'confirmed']
         ]);
         // dd([$matricule, $request['password']]);
-        if ($request['matricule'] != $matricule) {
-            return redirect()->route('student.signup-page');
-        }
         
-        Student::where('matricule', $matricule)
+        Student::where('matricule', $request['matricule'])
+               ->where('verification_code', $request['verification_code'])
                 ->update([
                     'password' => Hash::make($request['password'])
                 ]);
@@ -76,6 +75,8 @@ class StudentController extends Controller
             'profile' => ['nullable', 'mimes:jpg, png, jpeg', 'max:50482']
         ]);
 
+        $verification_code = uniqid();
+
         $data = $request->all();
         $height = config('image.height', 100);
         $width = config('image.width', 100);
@@ -94,6 +95,7 @@ class StudentController extends Controller
         $student->email = $data['email'];
         $student->matricule = $data['matricule'];
         $student->image_path = $newImageName;
+        $student->verification_code = $verification_code;
         $department = $data['department'];
 
         /** 
@@ -108,7 +110,6 @@ class StudentController extends Controller
         }
 
         $student->save();
-        
         SendEmail::dispatch($student);
 
         return redirect()->route('students');
